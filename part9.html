@@ -101,6 +101,7 @@
 
         });
 
+        // 16, 16 is the coordinate and 'score: 0' is the default text
         scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 
         this.physics.add.collider(player, platforms);
@@ -140,6 +141,9 @@
     {
         star.disableBody(true, true);
 
+        // changing the default and keeping the score, the default is 'score',
+        // with the change the text becomes 'Score' keeping it taht way so I can 
+        // see the changes better
         score += 10;
         scoreText.setText('Score: ' + score);
     }

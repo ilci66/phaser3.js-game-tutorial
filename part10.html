@@ -114,6 +114,7 @@ function create ()
 
     });
 
+    // the enemy
     bombs = this.physics.add.group();
 
     //  The score
@@ -127,6 +128,7 @@ function create ()
     //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
     this.physics.add.overlap(player, stars, collectStar, null, this);
 
+    // when the player touches a bomb
     this.physics.add.collider(player, bombs, hitBomb, null, this);
 }
 
@@ -170,17 +172,21 @@ function collectStar (player, star)
     score += 10;
     scoreText.setText('Score: ' + score);
 
+    // when there are no active stars
     if (stars.countActive(true) === 0)
     {
         //  A new batch of stars to collect
         stars.children.iterate(function (child) {
 
+            // Setting the x as 0 so they will be droppped from the top of the screen
             child.enableBody(true, child.x, 0, true, true);
 
         });
 
         var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
+        // find out where the player is and 
 
+        // create the bomb at the opposite side of the screen
         var bomb = bombs.create(x, 16, 'bomb');
         bomb.setBounce(1);
         bomb.setCollideWorldBounds(true);
@@ -196,6 +202,7 @@ function hitBomb (player, bomb)
 
     player.setTint(0xff0000);
 
+    // face the camera, like in mario :)
     player.anims.play('turn');
 
     gameOver = true;

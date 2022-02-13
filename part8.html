@@ -87,9 +87,12 @@
 
         cursors = this.input.keyboard.createCursorKeys();
 
+        // adding the stars
         stars = this.physics.add.group({
             key: 'star',
+            // 1 child is automaticly given, by repepating 11 times we get 12 ain total
             repeat: 11,
+            // stepX is the distance between the children
             setXY: { x: 12, y: 0, stepX: 70 }
         });
 
@@ -100,9 +103,13 @@
         });
 
         this.physics.add.collider(player, platforms);
+
+        // this ways starts won't go through the ground
         this.physics.add.collider(stars, platforms);
 
+        // checking if the player overlaps with a star
         this.physics.add.overlap(player, stars, collectStar, null, this);
+        // and when it happens we disable the star, with the function below "collectStart"
     }
 
     function update ()
